@@ -3,7 +3,7 @@ Bot time.
 '''
 import random
 
-from bot_config import bot_key
+from bot_config import bot_key, server_id, server_general_channel
 from pick6 import play_pick_6
 
 import nextcord
@@ -15,7 +15,7 @@ intents = nextcord.Intents.default()
 intents.message_content = True
 
 
-server_id = 399343983131885568
+
 
 
 
@@ -39,7 +39,7 @@ Better dead, than Red.''',
 @bot.event
 async def on_ready():
 
-    general_channel = bot.get_channel(399343983131885570)
+    general_channel = bot.get_channel(server_general_channel)
 
     await general_channel.send(random.choice(prime_join_list).upper())
 
@@ -59,9 +59,9 @@ async def calc_func(interaction: Interaction, volt:int, series:str, parallel:str
     Here are your results.
     -- VOLTAGE --
     {circuit_1.voltage['Voltage']}
-    -- RESISTANCE --
+    -- RESISTANCE ohms--
     {circuit_1.resistance['Resistance']}
-    -- CURRENT --
+    -- CURRENT mA--
     {circuit_1.current['Current']}
     '''
     await interaction.response.send_message(response_f_str)

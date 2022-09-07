@@ -39,6 +39,8 @@ class Circuit:
         cs = 1
         cp = 1
         for ohms in resistance_parallel:
+            if ohms == 0:
+                break
             self.current['Current']['Cp'+str(cp)] = 1000 * round(voltage_parallel / ohms, 8)
             cp += 1
 
