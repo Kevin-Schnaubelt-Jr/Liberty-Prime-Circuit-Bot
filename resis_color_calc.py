@@ -11,16 +11,16 @@ band_tolerance = {'brown': ['+-1%',1.01, 0.99],'red': ['+-2%',1.02, 0.98],'green
 def band_calculator(color_1, color_2, color_3, color_4):
     band_str =''
     band_value = int(band_1_and_2[color_1] + band_1_and_2[color_2])
-    print(band_value, type(band_value))
+    # print(band_value, type(band_value))
     band_value = band_value * band_multiplier[color_3]
-    print(band_value)
-    if band_value > 1000000000:
+    # print(band_value)
+    if band_value >= 1000000000:
         band_value *= .000000001
         band_str = 'G'
-    elif band_value > 1000000:
+    elif band_value >= 1000000:
         band_value *= 0.000001
         band_str = 'M'
-    elif band_value > 1000:
+    elif band_value >= 1000:
         band_value *= 0.001
         band_str = 'k'
     return_f_str = f'''
