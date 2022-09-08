@@ -11,6 +11,10 @@ from nextcord import Interaction, Intents, SlashOption
 from nextcord.ext import commands
 
 from Calculations import circuit_builder
+
+from resis_color_calc import band_calculator, band_1_and_2, band_multiplier,band_tolerance
+
+
 intents = nextcord.Intents.default()
 intents.message_content = True
 
@@ -84,14 +88,22 @@ contacts_description = f'''
 This is the description for the...
 contacts slash command'''
 @bot.slash_command(name='contacts', description=contacts_description)
-async def contacts_func(interaction: Interaction, number: int = SlashOption(
-        name="picker",
-        choices={"one": 1, "two": 2, "three": 3},
-    )):
+async def contacts_func(interaction: Interaction,
+ number: int = SlashOption(name="picker", choices={'one': 1, "two": 2, "three": 3}, )):
 
 
     # await interaction.response.Slash
-    await interaction.response.send_message('working')
+    await interaction.response.send_message(str(number))
+
+
+@bot.slash_command(name='resistor_band_calc', description='Calc resistors')
+async def resistor_calc(interaction: Interaction,
+color_1: str = SlashOption(name="color_1", choices={'black' : 'black','brown': 'brown','red': 'red','orange': 'orange','yellow': 'yellow','green': 'green','blue': 'blue','violet':'violet','grey': 'grey','white': 'white'},),
+color_2: str = SlashOption(name="color_2", choices={'black' : 'black','brown': 'brown','red': 'red','orange': 'orange','yellow': 'yellow','green': 'green','blue': 'blue','violet':'violet','grey': 'grey','white': 'white'},),
+color_3: str = SlashOption(name="color_3", choices={'black' : 'black','brown': 'brown','red': 'red','orange': 'orange','yellow': 'yellow','green': 'green','blue': 'blue','violet':'violet','grey': 'grey','white': 'white','gold': 'gold','silver': 'silver'},),
+color_4: str = SlashOption(name="color_4", choices={'brown': 'brown','red': 'red','green': 'green','blue': 'blue','violet': 'violet','grey': 'grey','gold': 'gold','silver': 'silver'},),
+):
+    await interaction.response.send_message(band_calculator(color_1, color_2, color_3, color_4))
 
 bot.run(bot_key)
 
