@@ -64,11 +64,11 @@ def circuit_builder(voltage_int, resistance_series_str, resistance_parallel_str)
 
     voltage = voltage_int
     resistance_series = resistance_series_str.split(',')
-    resistance_series = [int(i) for i in resistance_series]
+    resistance_series = [float(i) for i in resistance_series]
 
     
     resistance_parallel = resistance_parallel_str.split(',')
-    resistance_parallel = [int(i) for i in resistance_parallel]
+    resistance_parallel = [float(i) for i in resistance_parallel]
 
 
 
@@ -92,7 +92,7 @@ def circuit_builder(voltage_int, resistance_series_str, resistance_parallel_str)
 
 
 
-# circuit_builder(10,'300,850','600,450')
+# circuit_builder(3,'0','2.3,6,8.5')
 # print_circuit(circuit_1.voltage)
 # print_circuit(circuit_1.resistance)
 # print_circuit(circuit_1.current)
