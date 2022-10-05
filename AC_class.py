@@ -106,7 +106,7 @@ L = 20 #mh = .020 H
 L = .020
 
 #Reactance for capacitors 
-Xc = 1 / (2 * math.pi * F * C)
+Xc = -abs(1 / (2 * math.pi * F * C))
 print(f'{Xc=}')
 
 #Reactance for inductors
@@ -114,7 +114,7 @@ Xl = 2 * math.pi * F * L
 print(f'{Xl=}')
 
 #Total reactance
-Xt = Xc - Xl
+Xt = Xc + Xl
 print(f'{Xt=}')
 
 #Impedance IN SERIES
@@ -130,7 +130,7 @@ rectangular_form = math.sqrt(pow(Zp.real,2) + pow(Zp.imag, 2))
 print(f'{rectangular_form=}')
 
 #Impedance in parallel rectangular TO POLAR
-polar_form = math.degrees(math.atan(Zp.imag / Zp.real))
+polar_form = -abs(math.degrees(math.atan(Zp.imag / Zp.real)))
 print(f'{polar_form=}')
 
 
