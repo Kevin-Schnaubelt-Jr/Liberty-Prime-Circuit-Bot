@@ -85,7 +85,7 @@ print(c, q)
 
 
 
-# polar to rectangular convert
+
 '''
 # Z = 4 and L45degrees
 
@@ -93,43 +93,7 @@ z = complex((4 * math.cos(math.radians(45))), (4 * math.sin(math.radians(45))))
 print(z) # should be 2.83 + 2.83j
 '''
 
-'''
-Xl = 2 pi f L
 
-xc = 1/(2 pi f c)
-
-'''
-
-'''
-Vs = 120 # Vrms
-F = 60 #Hz
-R = 100 #ohms
-C = 1 #mF .000001 F
-C = 0.000001
-L = 1 #mH .001 H
-L = .001
-
-#Reactence of capacitor
-Xc = 1 / (2 * math.pi * F * C) 
-
-print(Xc)
-#Reactence of inductor
-Xl = 2 * math.pi * F * L
-print(Xl)
-#Impedence of capacitor
-# Zc = Xc 
-# print(Zt)
-
-#Impedence of inductor
-
-# Is = Vs/Zt
-
-y = complex(100, Zt)
-ypi = (y.real * 2) + (y.imag * 2)
-ypi = math.sqrt(ypi)
-
-print(ypi)
-'''
 
 #example 2
 
@@ -141,21 +105,43 @@ C = .000010
 L = 20 #mh = .020 H
 L = .020
 
+#Reactance for capacitors 
 Xc = 1 / (2 * math.pi * F * C)
-print('Xc',Xc)
+print(f'{Xc=}')
 
+#Reactance for inductors
 Xl = 2 * math.pi * F * L
-print('Xl',Xl)
+print(f'{Xl=}')
 
-Zr = 100 #ohms +-0j
-# Zc = ?
-# Zt = 274.44 # -68.793 ?should be?
+#Total reactance
+Xt = Xc - Xl
+print(f'{Xt=}')
 
-Zt = complex(-Xc, Xl)
-print(Zt)
+#Impedance IN SERIES
+Zs = math.sqrt(pow(R,2) + pow(Xt,2))
+print(f'{Zs=}')
 
-Zt = math.sqrt(abs((Zt.real * 2)) + (Zt.imag * 2))
+#Impedance IN PARALLEL
+Zp =  complex(R, Xt)
+print(f'{Zp=}')
 
-print(Zt)
+#Impedance in parallel RECTANGULAR FORM
+rectangular_form = math.sqrt(pow(Zp.real,2) + pow(Zp.imag, 2))
+print(f'{rectangular_form=}')
+
+#Impedance in parallel rectangular TO POLAR
+polar_form = math.degrees(math.atan(Zp.imag / Zp.real))
+print(f'{polar_form=}')
+
+
+#Current in series
+Is = Vs/Zs 
+print(f'{Is=}')
+
+#Magic????
+magic = complex(( rectangular_form * math.cos(math.radians(polar_form))),
+ (rectangular_form * math.sin(math.radians(polar_form))))
+print(f'{magic=}')
+
 
 
