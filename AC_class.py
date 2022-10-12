@@ -96,7 +96,7 @@ print(z) # should be 2.83 + 2.83j
 
 
 #example 2
-
+'''
 Vs = 10 #V
 F = 60 #Hz
 R = 100 #ohms
@@ -142,6 +142,76 @@ print(f'{Is=}')
 magic = complex(( rectangular_form * math.cos(math.radians(polar_form))),
  (rectangular_form * math.sin(math.radians(polar_form))))
 print(f'{magic=}')
+'''
 
+
+#example 3
+
+Vs = 10 #volts
+F = 100 #Hz
+R = 300 #Ohms
+L = 300 #mF
+L = .3
+C = 300 #mF
+C = .0003
+
+Zr = 100 #Ohms Rectangular. Polar form is 100 with an angle of 0 degrees
+
+Xl = 2 * math.pi * F * L
+print(f'{Xl=}')
+
+Xc = -abs(1 / (2 * math.pi * F * C))
+print(f'{Xc=}')
+
+Xt = Xc + Xl
+print(f'{Xt=}')
+
+Zs = math.sqrt(pow(R,2) + pow(Xt,2))
+print(f'{Zs=}')
+
+Zp =  complex(R, Xt)
+print(f'{Zp=}')
+
+rectangular_form = math.sqrt(pow(Zp.real,2) + pow(Zp.imag, 2))
+print(f'{rectangular_form=}')
+
+polar_form = math.degrees(math.atan(Zp.imag / Zp.real))
+print(f'{polar_form=} Degrees')
+
+complex_result = complex(rectangular_form, polar_form)
+print(f'{complex_result=}')
+
+Is = Vs/Zs 
+print(f'{Is=}')
+
+Is_polar = complex(Is, -abs(polar_form))
+print(f'{Is_polar=}')
+
+
+#volt drop
+Vr = Is * R
+print(f'{Vr=}')
+#Converts to 7.28428 - j4.448 somehow
+
+Vl = complex(Is * Xl, -polar_form + 90)
+print(f'{Vl=}')
+#converts to 2.7947 +j4.57711
+
+
+Vc = complex(Is * Xc, -polar_form + -90)
+print(f'{Vc=}')
+# converts to -0.07875 -j0.12896
+
+'''
+Apparent Power (VA)
+Reactive Power (VAR)
+Real Power (W watts)
+
+P = Real Power = I squared * R = V squared / R
+
+Q = Reactive Power = I squared * X = V squared / X
+
+S = Apparent Power = I squared * Z = V squared / Z
+'''
 
 
