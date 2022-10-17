@@ -83,7 +83,10 @@ print(c, q)
 
 '''
 
-
+#CONVERT TO RECTANGULAR
+'''
+convert_to_rectangular = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), -math.degrees(math.atan(It.imag / It.real)))
+'''
 
 
 '''
@@ -146,7 +149,7 @@ print(f'{magic=}')
 
 
 #example 3
-
+'''
 Vs = 10 #volts
 F = 100 #Hz
 R = 300 #Ohms
@@ -188,6 +191,8 @@ Is_polar = complex(Is, -abs(polar_form))
 print(f'{Is_polar=}')
 
 
+
+
 #volt drop
 Vr = Is * R
 print(f'{Vr=}')
@@ -201,6 +206,7 @@ print(f'{Vl=}')
 Vc = complex(Is * Xc, -polar_form + -90)
 print(f'{Vc=}')
 # converts to -0.07875 -j0.12896
+'''
 
 '''
 Apparent Power (VA)
@@ -213,5 +219,36 @@ Q = Reactive Power = I squared * X = V squared / X
 
 S = Apparent Power = I squared * Z = V squared / Z
 '''
+
+#RCL Parallel circuits
+'''
+V = 120 #Vrms
+F = 60 #Hz
+R = 250 #Ohms
+L = 650 #Mh
+L = .65
+C = 1.5 #uF
+C = .0000015
+
+Zr = R #total R
+
+Xl = 2 * math.pi * F * L
+print(f'{Xl=}')
+
+Xc = -abs(1 / (2 * math.pi * F * C))
+print(f'{Xc=}')
+
+Zt = 1/ complex((1/Zr), (1/Xl) + (1/Xc))
+print(f'{Zt=}')
+Ir = V / R #with 0 degrees
+Il = V / Xl #with -90 degrees
+Ic = V / Xc #with 90 degrees
+It = complex(Ir, Il + Ic)
+print(f'{It=}') #should be 0.639 with an angle of -41.307 degrees
+
+convert_to_rectangular = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), -math.degrees(math.atan(It.imag / It.real)))
+print(convert_to_rectangular)
+'''
+
 
 
