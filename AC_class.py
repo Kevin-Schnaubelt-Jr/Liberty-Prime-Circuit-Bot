@@ -250,5 +250,55 @@ convert_to_rectangular = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), 
 print(convert_to_rectangular)
 '''
 
+#test notes
+'''
+T = 1/f | F = 1/T | F = 1/40ms = 1 / .000040s = 25,000 Hz #peak volt was 2v#
+'''
+
+#Parallel example 2
+# Ir = Vs/Zr - Il = Vs/Zl - Ic = Vs/Zc
+V = 10 #vrms
+F = 100 #Hz
+
+R = 300 #Ohms
+L = 300 #mH
+L = .3
+C = 300 #mF
+C = .0003
+
+Zr = R
+
+Xl = 2 * math.pi * F * L
+print(f'{Xl=} Ohms') 
+
+Xc = 1 / (2 * math.pi * F * C)
+print(f'{Xc=} Ohms')
+
+Zl = Xl
+print(f'+j {Zl=} Ohms 90 degrees')
+
+Zc = Xc
+print(f'-j {Zc=} Ohms -90 degrees')
+
+Ir = V / Zr
+print(f'{Ir=} A 0 degrees')
+
+Il = V / Zl
+print(f'{Il=} A -90 degrees')
+
+Ic = V / Zc
+print(f'{Ic=} A 90 degrees')
+
+Is = complex(Ir, Ic - Il)
+print(f'{Is=}')
+
+magnitude = math.sqrt(pow(Is.real,2) + pow(Is.imag, 2))
+print(f'{magnitude=}')
+
+Q = math.degrees(math.atan(Is.imag / Is.real))
+print(f'{Q=} Degrees')
+
+Zt = V / magnitude
+print(f'{Zt=} Ohms {-Q} degrees')
 
 
