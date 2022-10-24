@@ -83,9 +83,9 @@ print(c, q)
 
 '''
 
-#CONVERT TO RECTANGULAR
+#CONVERT TO POLAR
 '''
-convert_to_rectangular = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), -math.degrees(math.atan(It.imag / It.real)))
+convert_to_polar = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), -math.degrees(math.atan(It.imag / It.real)))
 '''
 
 
@@ -246,7 +246,7 @@ Ic = V / Xc #with 90 degrees
 It = complex(Ir, Il + Ic)
 print(f'{It=}') #should be 0.639 with an angle of -41.307 degrees
 
-convert_to_rectangular = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), -math.degrees(math.atan(It.imag / It.real)))
+convert_to_polar = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), -math.degrees(math.atan(It.imag / It.real)))
 print(convert_to_rectangular)
 '''
 
