@@ -247,7 +247,7 @@ It = complex(Ir, Il + Ic)
 print(f'{It=}') #should be 0.639 with an angle of -41.307 degrees
 
 convert_to_polar = complex((math.sqrt(pow(It.real,2) + pow(It.imag, 2))), -math.degrees(math.atan(It.imag / It.real)))
-print(convert_to_rectangular)
+print(convert_to_polar)
 '''
 
 #test notes
@@ -257,6 +257,7 @@ T = 1/f | F = 1/T | F = 1/40ms = 1 / .000040s = 25,000 Hz #peak volt was 2v#
 
 #Parallel example 2
 # Ir = Vs/Zr - Il = Vs/Zl - Ic = Vs/Zc
+'''
 V = 10 #vrms
 F = 100 #Hz
 
@@ -300,5 +301,56 @@ print(f'{Q=} Degrees')
 
 Zt = V / magnitude
 print(f'{Zt=} Ohms {-Q} degrees')
+'''
+
+#Combo Circuit!
+''''''
+
+V = 120 #Vrms
+F = 60 #Hz
+C1 = 4.7 #Mf
+C1 = 0.0000047
+L = 650 #Mh
+L = .65
+C2 = 1.5 #mF
+C2 = .0000015
+R = 470 #Ohms
+
+Xc1 = 1 / (2 * math.pi * F * C1)
+print(f'{Xc1=} Ohms')
+
+Xl = 2 * math.pi * F * L
+print(f'{Xl=} Ohms') 
+
+Xc2 = 1 / (2 * math.pi * F * C2)
+print(f'{Xc2=} Ohms')
+
+Zr = R
+
+print(f'Zc1 in rectangular is -j{Xc1} and in polar form it is {Xc1} with -90 degrees')
+print(f'Zc2 in rectangular is -j{Xc2} and in polar form it is {Xc2} with -90 degrees')
+print(f'Zcl in rectangular is +j{Xl} and in polar form it is {Xl} with +90 degrees')
+
+# L and C2 are in series
+G1 = -Xc2 + Xl
+print(f'j{G1=} in rectagular and {+G1=} with -90 degrees in polar')
+
+#R is in parallel with G1
+G3 = 1/ math.sqrt(pow(1/Zr,2) + pow(1/G1, 2))
+
+Q = math.degrees(math.atan((1/G1) / (1/Zr) )) #Zr is run, G1 is rise. Rise over run for Atan.
+
+print(f'{G3=} with {Q} degrees')
+
+#polar to rectangular convert
+
+G3_Rectangular = complex(( G3 * math.cos(math.radians(Q))),
+ (G3 * math.sin(math.radians(Q))))
+
+print(f'{G3_Rectangular=}')
+
+G4 = Xc1
+Zt = complex(G3_Rectangular.real, abs(G3_Rectangular.imag) + G4)
+print(f'{Zt=}')
 
 
