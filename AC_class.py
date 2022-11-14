@@ -350,7 +350,23 @@ G3_Rectangular = complex(( G3 * math.cos(math.radians(Q))),
 print(f'{G3_Rectangular=}')
 
 G4 = Xc1
-Zt = complex(G3_Rectangular.real, abs(G3_Rectangular.imag) + G4)
-print(f'{Zt=}')
+Zt_rectangle = complex(G3_Rectangular.real, abs(G3_Rectangular.imag) + G4)
+Zt_polar = complex((math.sqrt(pow(Zt_rectangle.real,2) + pow(Zt_rectangle.imag, 2))), -math.degrees(math.atan(Zt_rectangle.imag / Zt_rectangle.real)))
+print(f'{Zt_rectangle=}, {Zt_polar=}')
+
+print('C1 rectangular is 120 VRMS +j0, polar is 120Vrms at an angle of 0 degrees')
+
+I_total_polar = V / Zt_polar.real
+print(f'{I_total_polar=} amps at {abs(Zt_polar.imag)} degrees')
+
+I_total_rectangular = complex((I_total_polar * math.cos(math.radians(abs(Zt_polar.imag)))), (I_total_polar * math.sin(math.radians(abs(Zt_polar.imag)))))
+print(f'{I_total_rectangular=}')
+
+#Vc1 = Is * Zc1 = 82.795 with -31.6 degrees
+
+# Vc1 = I_total_polar * Xc1
+Vc1 = math.degrees(math.atan(Zt_polar.imag / -90))
+print(f'{Vc1=}')
+
 
 
